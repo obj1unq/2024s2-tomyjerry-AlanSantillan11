@@ -1,25 +1,61 @@
 object tom {
-	var energia = 50
-	
-	method comer(raton) {
-		energiar = self.energiaQueAportaAlComerRaton(raton)
-	}
-	
-	method correr(distancia) {
-		energia -= distancia / 2
-	}
-	
-	method velocidadMaxima() {
 
-	return  5 + energia/10 
+    var energia = 50
+
+    method comer(raton) {
+        energia = energia + self.energiaQueAporta(raton)
+    }
+
+    method correr(distancia){
+        energia = energia - self.energiaQueGasta(distancia)
+    }
+
+    method velocidadMaxima()  {
+        return 5 + energia / 10
+    }
+
+    method energiaQueGasta(distancia) {
+        return distancia / 2
+    }
+
+    method puedeComer(raton, distancia) {
+        return self.energiaQueGasta(distancia) < energia 
+    }
+
+    method quiereComer(raton, distancia) {
+        return self.puedeComer(raton, distancia) and self.convieneComer(raton, distancia)
+    }
+
+    method convieneComer(raton, distancia) {
+        return self.energiaQueGasta(distancia) < self.energiaQueAporta(raton)
+    }
+
+    method energiaQueAporta(raton) {
+        return 12 + raton.peso()
+    }
+
 }
 
+
 object jerry {
-	var peso = edad * 20
-	var edad = 2
+
+    var edad = 2
+    method peso() {
+        return edad*20
+    }
+    method edad() {
+        return edad
+    }
+    method cumplir() {
+        edad = edad +  1 
+
+    }
 }
 
 object nibbles {
-	var peso = 35
-	var edad = peso / 20
+
+method peso() {
+        return 35
+    }
+
 }
